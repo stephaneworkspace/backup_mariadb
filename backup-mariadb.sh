@@ -15,7 +15,6 @@ DATE=$(date +%F)
 for DB_NAME in "${DATABASES[@]}"
 do
     BACKUP_FILE="${DIRECTORY_NAME}/${DB_NAME}_backup_${DATE}.sql"
-    pg_dump -U postgres -d $DB_NAME > $BACKUP_FILE
     /usr/bin/mariadb-dump --defaults-file=/home/arch/backup_mariadb/my.cnf $DB_NAME > $BACKUP_FILE
     swift upload $CONTAINER_NAME $BACKUP_FILE
     rm $BACKUP_FILE
